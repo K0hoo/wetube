@@ -8,6 +8,6 @@ userRouter.get(routes.users, userIndex);
 // 'edit' and 'change password' should precede 'detail' to work.
 userRouter.get(routes.editProfile, userEdit);
 userRouter.get(routes.changePassword, userChangePassword);
-userRouter.get(routes.userDetail, userDetail);
+userRouter.get(routes.userDetail(), userDetail);
 
 export default userRouter;
