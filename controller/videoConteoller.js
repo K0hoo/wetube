@@ -96,5 +96,5 @@ export const videoDelete = async (req, res) => {
   } catch (error) {
     res.redirect(routes.home);
   }
-  res.render("deleteVideo", { pageTitle: "Delete Video" });
+  // res.render("deleteVideo", { pageTitle: "Delete Video" });
 };
