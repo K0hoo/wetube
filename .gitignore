@@ -109,3 +109,4 @@ dist
 #For Saving security
 package-lock.json
 uploads
+static
