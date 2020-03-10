@@ -62,11 +62,45 @@ export const githubLoginCallback = async (
     });
     return cb(null, newUser);
   } catch (error) {
-    console.log(error);
+    return cb(error);
   }
 };
 
 export const postGithubLogin = (req, res) => {
+  res.redirect(routes.home);
+};
+
+export const facebookLogin = passport.authenticate("facebook");
+
+export const facebookLoginCallback = async (
+  accessToken,
+  refreshToken,
+  profile,
+  cb
+) => {
+  const {
+    _json: { id, name, email }
+  } = profile;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      user.facebookId = id;
+      user.save();
+      return cb(null, user);
+    }
+    const newUser = await User.create({
+      email,
+      name,
+      facebookId: id,
+      avatarUrl: `https://graph.facebook.com/${id}/picture?type=large`
+    });
+    return cb(null, newUser);
+  } catch (error) {
+    return cb(error);
+  }
+};
+
+export const postFacebookLogin = (req, res) => {
   res.redirect(routes.home);
 };
 
